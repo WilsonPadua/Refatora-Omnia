@@ -139,6 +139,10 @@ public class MovementController {
         this.mover.getMovementAnimation().setIsMoving(this.mover.getIsMoving());
     }
 
+    void paceVertically() {
+        paceVertically(5, 10, (int)movementSpace.getMinY(), (int)movementSpace.getMaxY());
+    }
+
     private void paceVertically(int waitMultiple, int waitReset, int minYBound, int maxYBound) {
 
         if (this.waitCount == 0 || this.waitCount == (waitMultiple + 1) * waitReset) {
