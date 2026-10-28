@@ -10,7 +10,8 @@ import net.wforbes.omnia.overworld.entity.animation.MovementAnimation;
 import net.wforbes.omnia.overworld.entity.attention.EnemyTargetController;
 import net.wforbes.omnia.overworld.entity.combat.stat.MobStats;
 import net.wforbes.omnia.overworld.entity.mob.Mob;
-import net.wforbes.omnia.overworld.entity.movement.MovementController;
+import net.wforbes.omnia.overworld.entity.movement.FollowTargetBehavior;
+import net.wforbes.omnia.overworld.entity.movement.StandBehavior;
 import net.wforbes.omnia.overworld.entity.pathfind.EnemyPathfindController;
 
 import static net.wforbes.omnia.game.Game.getScale;
@@ -131,9 +132,7 @@ public class Enemy extends Mob {
         this.isAggroed = true;
         this.setTarget(target);
         this.enemyTargetController.getTarget().notifyEnemyAggro(this);
-        this.movementController.setMovementType(
-                MovementController.MOVEMENT_FOLLOW_TARGET
-        );
+        this.movementController.setMovementBehavior(new FollowTargetBehavior());
         this.pathfindController.moveToPoint(
                 new Point2D(target.getXActual(), target.getYActual())
         );
@@ -143,9 +142,7 @@ public class Enemy extends Mob {
 
     private void stopAggro() {
         this.isAggroed = false;
-        this.movementController.setMovementType(
-                MovementController.MOVEMENT_STAND
-        );
+        this.movementController.setMovementBehavior(new StandBehavior());
     }
 
 
